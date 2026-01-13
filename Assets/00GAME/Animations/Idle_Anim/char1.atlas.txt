@@ -1,0 +1,158 @@
+
+char1.png
+size: 1005,910
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Vai_1
+  rotate: false
+  xy: 651, 251
+  size: 272, 236
+  orig: 274, 241
+  offset: 1, 4
+  index: -1
+Vai_2
+  rotate: false
+  xy: 2, 35
+  size: 269, 256
+  orig: 271, 258
+  offset: 1, 1
+  index: -1
+chan_2_2
+  rotate: true
+  xy: 273, 30
+  size: 245, 333
+  orig: 247, 335
+  offset: 1, 1
+  index: -1
+chan_2_2 copy
+  rotate: true
+  xy: 273, 30
+  size: 245, 333
+  orig: 247, 335
+  offset: 1, 1
+  index: -1
+chan_3_1
+  rotate: false
+  xy: 326, 277
+  size: 323, 225
+  orig: 325, 227
+  offset: 1, 1
+  index: -1
+chan_3_2
+  rotate: false
+  xy: 2, 293
+  size: 322, 219
+  orig: 324, 221
+  offset: 1, 1
+  index: -1
+chan_4_2
+  rotate: true
+  xy: 436, 711
+  size: 197, 294
+  orig: 197, 294
+  offset: 0, 0
+  index: -1
+chan_4_2 copy
+  rotate: true
+  xy: 436, 711
+  size: 197, 294
+  orig: 197, 294
+  offset: 0, 0
+  index: -1
+co
+  rotate: false
+  xy: 184, 713
+  size: 250, 195
+  orig: 252, 197
+  offset: 1, 1
+  index: -1
+namtay1_tay_2_2
+  rotate: false
+  xy: 2, 739
+  size: 180, 169
+  orig: 183, 171
+  offset: 2, 1
+  index: -1
+namtay2_tay_2_2
+  rotate: true
+  xy: 653, 489
+  size: 213, 227
+  orig: 215, 229
+  offset: 1, 1
+  index: -1
+tay_1_1
+  rotate: true
+  xy: 608, 2
+  size: 247, 369
+  orig: 249, 371
+  offset: 1, 1
+  index: -1
+tay_1_3
+  rotate: false
+  xy: 348, 504
+  size: 303, 205
+  orig: 305, 207
+  offset: 1, 1
+  index: -1
+tay_2_1
+  rotate: true
+  xy: 2, 514
+  size: 197, 344
+  orig: 199, 346
+  offset: 1, 1
+  index: -1
+tay_2_2
+  rotate: true
+  xy: 732, 704
+  size: 204, 271
+  orig: 207, 273
+  offset: 2, 1
+  index: -1
+
+char12.png
+size: 854,615
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dau
+  rotate: true
+  xy: 498, 338
+  size: 275, 354
+  orig: 275, 354
+  offset: 0, 0
+  index: -1
+tay_1_2
+  rotate: true
+  xy: 2, 362
+  size: 251, 494
+  orig: 253, 496
+  offset: 1, 1
+  index: -1
+than2
+  rotate: false
+  xy: 2, 2
+  size: 512, 334
+  orig: 512, 334
+  offset: 0, 0
+  index: -1
+
+char13.png
+size: 979,809
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bua
+  rotate: true
+  xy: 2, 2
+  size: 805, 436
+  orig: 807, 438
+  offset: 1, 1
+  index: -1
+than_1
+  rotate: false
+  xy: 440, 246
+  size: 537, 561
+  orig: 537, 561
+  offset: 0, 0
+  index: -1
