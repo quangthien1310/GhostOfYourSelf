@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Spine.Unity;
 
@@ -15,6 +16,8 @@ public class PlayerController2D : MonoBehaviour
     [Header("Spine")]
     public SkeletonAnimation skeleton;
 
+    public GameObject winPanel;
+    
     Rigidbody2D rb;
 
     bool isGrounded;
@@ -30,6 +33,11 @@ public class PlayerController2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        winPanel.gameObject.SetActive(false);
+    }
+
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -38,11 +46,11 @@ public class PlayerController2D : MonoBehaviour
         HandleInteraction();
         HandleAnimation();
         HandleFlip();
+        HandleMovement();
     }
 
     void FixedUpdate()
     {
-        HandleMovement();
     }
 
     // ================= MOVEMENT =================
@@ -91,8 +99,7 @@ public class PlayerController2D : MonoBehaviour
 
         if (hit && hit.collider.CompareTag("Pushable"))
         {
-            currentObject = hit.collider.GetComponent<PushPullObject>();
-            if (currentObject == null) return;
+            if (!hit.collider.TryGetComponent<PushPullObject>(out currentObject)) return;
 
             isInteracting = true;
             rb.gravityScale = 0;
@@ -174,4 +181,15 @@ public class PlayerController2D : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("End"))
+        {
+            winPanel.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+    
+    
 }
