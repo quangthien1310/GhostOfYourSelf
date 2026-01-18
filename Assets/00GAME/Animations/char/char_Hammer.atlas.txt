@@ -1,0 +1,181 @@
+
+char_Hammer.png
+size: 136,1144
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: false
+  xy: 4, 819
+  size: 119, 124
+  orig: 119, 124
+  offset: 0, 0
+  index: -1
+Foot_L1
+  rotate: false
+  xy: 84, 345
+  size: 45, 76
+  orig: 45, 76
+  offset: 0, 0
+  index: -1
+Foot_L2
+  rotate: true
+  xy: 4, 405
+  size: 54, 76
+  orig: 54, 76
+  offset: 0, 0
+  index: -1
+Foot_R2
+  rotate: true
+  xy: 4, 405
+  size: 54, 76
+  orig: 54, 76
+  offset: 0, 0
+  index: -1
+Foot_L3
+  rotate: true
+  xy: 74, 269
+  size: 72, 50
+  orig: 72, 50
+  offset: 0, 0
+  index: -1
+Foot_R1
+  rotate: false
+  xy: 86, 425
+  size: 45, 76
+  orig: 45, 76
+  offset: 0, 0
+  index: -1
+Foot_R3
+  rotate: true
+  xy: 72, 193
+  size: 72, 49
+  orig: 72, 49
+  offset: 0, 0
+  index: -1
+Hammer
+  rotate: false
+  xy: 4, 946
+  size: 102, 193
+  orig: 102, 193
+  offset: 0, 0
+  index: -1
+Hand_L1
+  rotate: true
+  xy: 4, 604
+  size: 60, 109
+  orig: 60, 109
+  offset: 0, 0
+  index: -1
+Hand_L2
+  rotate: false
+  xy: 4, 345
+  size: 69, 56
+  orig: 69, 56
+  offset: 0, 0
+  index: -1
+Hand_L3_D
+  rotate: false
+  xy: 4, 283
+  size: 66, 58
+  orig: 66, 58
+  offset: 0, 0
+  index: -1
+Hand_L3_K
+  rotate: false
+  xy: 73, 88
+  size: 57, 49
+  orig: 57, 49
+  offset: 0, 0
+  index: -1
+Hand_R1
+  rotate: true
+  xy: 4, 668
+  size: 69, 102
+  orig: 69, 102
+  offset: 0, 0
+  index: -1
+Hand_R2
+  rotate: false
+  xy: 68, 141
+  size: 63, 48
+  orig: 63, 48
+  offset: 0, 0
+  index: -1
+Hand_R3_D
+  rotate: true
+  xy: 4, 94
+  size: 43, 65
+  orig: 43, 65
+  offset: 0, 0
+  index: -1
+Hand_R3_N1
+  rotate: false
+  xy: 64, 6
+  size: 48, 39
+  orig: 48, 39
+  offset: 0, 0
+  index: -1
+Hand_R3_N2
+  rotate: false
+  xy: 4, 5
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+Head
+  rotate: true
+  xy: 4, 463
+  size: 61, 78
+  orig: 61, 78
+  offset: 0, 0
+  index: -1
+Neck
+  rotate: false
+  xy: 4, 47
+  size: 56, 43
+  orig: 56, 43
+  offset: 0, 0
+  index: -1
+Shoulde1
+  rotate: false
+  xy: 4, 222
+  size: 64, 57
+  orig: 64, 57
+  offset: 0, 0
+  index: -1
+Shoulder1_2
+  rotate: true
+  xy: 82, 528
+  size: 67, 46
+  orig: 67, 46
+  offset: 0, 0
+  index: -1
+Shoulder2
+  rotate: false
+  xy: 4, 161
+  size: 60, 57
+  orig: 60, 57
+  offset: 0, 0
+  index: -1
+armor_1
+  rotate: false
+  xy: 4, 741
+  size: 106, 74
+  orig: 106, 74
+  offset: 0, 0
+  index: -1
+armor_2
+  rotate: false
+  xy: 4, 528
+  size: 74, 72
+  orig: 74, 72
+  offset: 0, 0
+  index: -1
+armor_3
+  rotate: true
+  xy: 64, 49
+  size: 35, 65
+  orig: 35, 65
+  offset: 0, 0
+  index: -1

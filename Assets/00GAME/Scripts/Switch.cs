@@ -1,104 +1,137 @@
 using UnityEngine;
-using System.Collections;
 
 public class Switch : MonoBehaviour
 {
     [Header("Settings")]
-    public Collider2D door;
+    [Tooltip("Kéo GameObject ExitPoint (có tag 'End') vào đây")]
+    public Collider2D exitPoint; 
     public SpriteRenderer switchRenderer;
+    
+    [Header("Visuals")]
+    public Color activeColor = Color.green;
+    public Color inactiveColor = Color.white;
 
-    [Header("Movement Settings")]
-    public float pressDepth = 1.0f;
-    public float deactivationDelay = 0.3f; // Thời gian chờ trước khi nhả nút
-    public float moveSpeed = 2f; // Tốc độ di chuyển của nút (càng lớn càng nhanh)
-
-    // Biến nội bộ
-    private SpriteRenderer doorRenderer;
-    private Vector3 initialPosition; // Vị trí cao nhất (gốc)
-    private Vector3 targetPosition;  // Vị trí mà nút CẦN đi tới
-    private Coroutine switchCoroutine;
+    private int objectsOnSwitch = 0;
 
     void Start()
     {
-        initialPosition = transform.localPosition;
-        
-        // Ban đầu mục tiêu chính là vị trí gốc
-        targetPosition = initialPosition;
-
-        if (door != null)
+        if (exitPoint != null)
         {
-            doorRenderer = door.GetComponent<SpriteRenderer>();
+            exitPoint.isTrigger = false;
+        }
+        UpdateVisuals(false);
+    }
+
+    // --- XỬ LÝ TRIGGER ---
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log($"[Switch] Trigger Enter: {other.gameObject.name} | Tag: {other.tag} | Layer: {LayerMask.LayerToName(other.gameObject.layer)}");
+        
+        if (IsValidObject(other.gameObject))
+        {
+            Debug.Log("-> HỢP LỆ (Trigger)");
+            AddObject();
         }
     }
 
-    // Dùng Update để xử lý chuyển động mượt
-    void Update()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        // Di chuyển vị trí hiện tại tới vị trí mục tiêu (targetPosition)
-        // MoveTowards đảm bảo nó dừng lại chính xác tại đích, không bị trượt quá
-        transform.localPosition = Vector3.MoveTowards(
-            transform.localPosition, 
-            targetPosition, 
-            moveSpeed * Time.deltaTime
-        );
+        if (IsValidObject(other.gameObject))
+        {
+            Debug.Log($"[Switch] Trigger Exit: {other.gameObject.name}");
+            RemoveObject();
+        }
     }
 
+    // --- XỬ LÝ COLLISION ---
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                if (contact.normal.y < -0.5f)
-                {
-                    // Nếu người chơi quay lại, huỷ việc đếm ngược tắt nút
-                    if (switchCoroutine != null)
-                    {
-                        StopCoroutine(switchCoroutine);
-                        switchCoroutine = null;
-                    }
+        Debug.Log($"[Switch] Collision Enter: {collision.gameObject.name} | Tag: {collision.gameObject.tag} | Layer: {LayerMask.LayerToName(collision.gameObject.layer)}");
 
-                    ActivateSwitch();
-                    break;
-                }
-            }
+        if (IsValidObject(collision.gameObject))
+        {
+            Debug.Log("-> HỢP LỆ (Collision)");
+            AddObject();
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (IsValidObject(collision.gameObject))
         {
-            switchCoroutine = StartCoroutine(DeactivateRoutine());
+            Debug.Log($"[Switch] Collision Exit: {collision.gameObject.name}");
+            RemoveObject();
         }
     }
 
-    IEnumerator DeactivateRoutine()
+    private bool IsValidObject(GameObject obj)
     {
-        yield return new WaitForSeconds(deactivationDelay);
-        DeactivateSwitch();
-        switchCoroutine = null;
+        // Bỏ qua Ground để đỡ spam log, nhưng vẫn log ở trên để kiểm tra
+        if (obj.CompareTag("Ground")) return false;
+
+        bool isPlayer = obj.CompareTag("Player");
+        bool isGhost = obj.GetComponent<GhostRewinder>() != null;
+        
+        if (!isGhost)
+        {
+            isGhost = obj.GetComponentInParent<GhostRewinder>() != null;
+        }
+
+        if (!isPlayer && !isGhost)
+        {
+            Debug.Log($"-> KHÔNG HỢP LỆ: Không phải Player (Tag={obj.tag}) và không có GhostRewinder");
+        }
+
+        return isPlayer || isGhost;
     }
 
-    void ActivateSwitch()
+    private void AddObject()
     {
-        // === THAY ĐỔI: Chỉ gán mục tiêu, không gán vị trí trực tiếp ===
-        targetPosition = new Vector3(initialPosition.x, initialPosition.y - pressDepth, initialPosition.z);
-
-        // Logic game (Mở cửa, đổi màu) vẫn làm ngay lập tức để phản hồi nhanh
-        if (door != null) door.isTrigger = true;
-        if (switchRenderer != null) switchRenderer.color = Color.green;
-        if (doorRenderer != null) doorRenderer.color = Color.green;
+        objectsOnSwitch++;
+        Debug.Log($"Objects on switch: {objectsOnSwitch}");
+        
+        if (objectsOnSwitch == 1)
+        {
+            SetState(true);
+        }
     }
 
-    void DeactivateSwitch()
+    private void RemoveObject()
     {
-        // === THAY ĐỔI: Gán mục tiêu về lại vị trí gốc ===
-        targetPosition = initialPosition;
+        objectsOnSwitch--;
+        if (objectsOnSwitch < 0) objectsOnSwitch = 0;
+        Debug.Log($"Objects on switch: {objectsOnSwitch}");
 
-        // Logic game (Đóng cửa, đổi màu)
-        if (door != null) door.isTrigger = false;
-        if (switchRenderer != null) switchRenderer.color = Color.white;
-        if (doorRenderer != null) doorRenderer.color = Color.white;
+        if (objectsOnSwitch == 0)
+        {
+            SetState(false);
+        }
+    }
+
+    private void SetState(bool isActive)
+    {
+        Debug.Log($"Set Switch State: {isActive}");
+        if (exitPoint != null)
+        {
+            exitPoint.isTrigger = isActive;
+        }
+        UpdateVisuals(isActive);
+    }
+
+    private void UpdateVisuals(bool isActive)
+    {
+        if (switchRenderer != null)
+        {
+            switchRenderer.color = isActive ? activeColor : inactiveColor;
+        }
+        
+        if (exitPoint != null)
+        {
+            var doorRenderer = exitPoint.GetComponent<SpriteRenderer>();
+            if (doorRenderer != null)
+            {
+                doorRenderer.color = isActive ? activeColor : inactiveColor;
+            }
+        }
     }
 }

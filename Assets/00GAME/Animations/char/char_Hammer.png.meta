@@ -1,0 +1,767 @@
+fileFormatVersion: 2
+guid: 04d7346818b4cc047a47576943f44115
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7680823379228743605
+    second: char_Hammer_0
+  - first:
+      213: -1996925522890144490
+    second: char_Hammer_1
+  - first:
+      213: 4375798953860750563
+    second: char_Hammer_2
+  - first:
+      213: 6947210226064568281
+    second: char_Hammer_3
+  - first:
+      213: -3253396330382213843
+    second: char_Hammer_4
+  - first:
+      213: -2168275852686412904
+    second: char_Hammer_5
+  - first:
+      213: 7111197728643571990
+    second: char_Hammer_6
+  - first:
+      213: -173600080872751742
+    second: char_Hammer_7
+  - first:
+      213: -2184626973521795292
+    second: char_Hammer_8
+  - first:
+      213: -9046418566617329355
+    second: char_Hammer_9
+  - first:
+      213: 1103939549652472431
+    second: char_Hammer_10
+  - first:
+      213: 7478534710513570181
+    second: char_Hammer_11
+  - first:
+      213: 1298295363036511284
+    second: char_Hammer_12
+  - first:
+      213: -7665756145737245419
+    second: char_Hammer_13
+  - first:
+      213: 737594502862321851
+    second: char_Hammer_14
+  - first:
+      213: -1461613421144842897
+    second: char_Hammer_15
+  - first:
+      213: 8983344938118131850
+    second: char_Hammer_16
+  - first:
+      213: -7943299295012747982
+    second: char_Hammer_17
+  - first:
+      213: 7651787299774083871
+    second: char_Hammer_18
+  - first:
+      213: 8054024662394767089
+    second: char_Hammer_19
+  - first:
+      213: 6968758611302713422
+    second: char_Hammer_20
+  - first:
+      213: 3178541940314862798
+    second: char_Hammer_21
+  - first:
+      213: 1530002268206383388
+    second: char_Hammer_22
+  - first:
+      213: -50787028062372232
+    second: char_Hammer_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: char_Hammer_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1100
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b482e82d4db386590800000000000000
+      internalID: -7680823379228743605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_1
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 1098
+        width: 50
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 615c83d21de7944e0800000000000000
+      internalID: -1996925522890144490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_2
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1053
+        width: 58
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ec556de6f5f9bc30800000000000000
+      internalID: 4375798953860750563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_3
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 1059
+        width: 67
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9df2a8884e2796060800000000000000
+      internalID: 6947210226064568281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1006
+        width: 67
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2d3206564d99d2d0800000000000000
+      internalID: -3253396330382213843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_5
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 1006
+        width: 59
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 893b199999cb8e1e0800000000000000
+      internalID: -2168275852686412904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 925
+        width: 62
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6116d5f48ac00b260800000000000000
+      internalID: 7111197728643571990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_7
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 954
+        width: 65
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28db99e65af379df0800000000000000
+      internalID: -173600080872751742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_8
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 865
+        width: 66
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4272f7c9755aea1e0800000000000000
+      internalID: -2184626973521795292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_9
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 878
+        width: 51
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 531964f5e3aa47280800000000000000
+      internalID: -9046418566617329355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_10
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 802
+        width: 68
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f625a86eb2bf15f00800000000000000
+      internalID: 1103939549652472431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_11
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 802
+        width: 52
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 581179c32b719c760800000000000000
+      internalID: 7478534710513570181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_12
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 742
+        width: 70
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43cf35701c8740210800000000000000
+      internalID: 1298295363036511284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_13
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 722
+        width: 47
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d509e7663cd9590800000000000000
+      internalID: -7665756145737245419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_14
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 684
+        width: 78
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb8b36bda467c3a00800000000000000
+      internalID: 737594502862321851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_15
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 642
+        width: 47
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6dd7b1665e47bbe0800000000000000
+      internalID: -1461613421144842897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_16
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 619
+        width: 80
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a80b55b10a04bac70800000000000000
+      internalID: 8983344938118131850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_17
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 543
+        width: 76
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2358728606bb3c190800000000000000
+      internalID: -7943299295012747982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_18
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 548
+        width: 48
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1331eb120c903a60800000000000000
+      internalID: 7651787299774083871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_19
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 479
+        width: 111
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f6864622c4a5cf60800000000000000
+      internalID: 8054024662394767089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_20
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 406
+        width: 104
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e488420f80106b060800000000000000
+      internalID: 6968758611302713422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_21
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 328
+        width: 108
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec4f528dd037c1c20800000000000000
+      internalID: 3178541940314862798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_22
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 200
+        width: 120
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c11cbf5e4f8ab3510800000000000000
+      internalID: 1530002268206383388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_Hammer_23
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 4
+        width: 104
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87ef42197719b4ff0800000000000000
+      internalID: -50787028062372232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      char_Hammer_0: -7680823379228743605
+      char_Hammer_1: -1996925522890144490
+      char_Hammer_10: 1103939549652472431
+      char_Hammer_11: 7478534710513570181
+      char_Hammer_12: 1298295363036511284
+      char_Hammer_13: -7665756145737245419
+      char_Hammer_14: 737594502862321851
+      char_Hammer_15: -1461613421144842897
+      char_Hammer_16: 8983344938118131850
+      char_Hammer_17: -7943299295012747982
+      char_Hammer_18: 7651787299774083871
+      char_Hammer_19: 8054024662394767089
+      char_Hammer_2: 4375798953860750563
+      char_Hammer_20: 6968758611302713422
+      char_Hammer_21: 3178541940314862798
+      char_Hammer_22: 1530002268206383388
+      char_Hammer_23: -50787028062372232
+      char_Hammer_3: 6947210226064568281
+      char_Hammer_4: -3253396330382213843
+      char_Hammer_5: -2168275852686412904
+      char_Hammer_6: 7111197728643571990
+      char_Hammer_7: -173600080872751742
+      char_Hammer_8: -2184626973521795292
+      char_Hammer_9: -9046418566617329355
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

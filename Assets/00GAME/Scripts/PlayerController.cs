@@ -134,34 +134,44 @@ public class PlayerController2D : MonoBehaviour
                 }
                 else
                 {
-                    PlayAnim("pull");
+                    PlayAnim("keo");
                 }
             }
             else
             {
-                PlayAnim("idle");
+                PlayAnim(null);
             }
             return;
         }
 
         if (!isGrounded)
         {
-            if (rb.linearVelocity.y > 0)
-                PlayAnim("jump");
-            else
-                PlayAnim("idle_jump");
+            PlayAnim("jump");
             return;
         }
 
         if (horizontal != 0)
-            PlayAnim("run");
+            PlayAnim("pull");
         else
-            PlayAnim("idle");
+            PlayAnim(null);
     }
 
     void PlayAnim(string anim)
     {
-        if (skeleton == null || skeleton.AnimationName == anim) return;
+        if (skeleton == null) return;
+
+        // Handle empty/null as "Stop animation" / "Setup pose"
+        if (string.IsNullOrEmpty(anim))
+        {
+            // Only set empty if we are not already empty
+            if (skeleton.AnimationState.GetCurrent(0) != null)
+            {
+                skeleton.AnimationState.SetEmptyAnimation(0, 0.1f);
+            }
+            return;
+        }
+
+        if (skeleton.AnimationName == anim) return;
         skeleton.AnimationState.SetAnimation(0, anim, true);
     }
 
@@ -190,6 +200,13 @@ public class PlayerController2D : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-    
-    
+
+    private void OnDrawGizmos()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = isGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+        }
+    }
 }
