@@ -1,76 +1,113 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Spine.Unity;
 
 public class GhostRewinder : MonoBehaviour
 {
-    [Header("Target")]
-    public SpineRewind targetRewind;
-    
-    [Header("Settings")]
-    public float delay = 1.0f; // Delay in seconds
-
     [Header("Ghost Components")]
     public SkeletonAnimation ghostSkeleton;
 
+    private List<SpineRewind.FrameData> replayData;
+    private bool isReplaying = false;
+    private float replayStartTime;
+    private int currentIndex = 0;
+    private Rigidbody2D rb;
+
     private void Start()
     {
-        // Auto-assign target if not set
-        if (targetRewind == null && GameManager.Instance != null && GameManager.Instance.playerTransform != null)
-        {
-            targetRewind = GameManager.Instance.playerTransform.GetComponent<SpineRewind>();
-        }
-
         if (ghostSkeleton == null)
         {
             ghostSkeleton = GetComponent<SkeletonAnimation>();
         }
 
-        // --- CẤU HÌNH VẬT LÝ CHO GHOST ---
-        // Để Ghost có thể kích hoạt Switch (Trigger), nó cần Rigidbody2D và Collider2D
-        
-        var rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
         {
-            rb.bodyType = RigidbodyType2D.Kinematic; // Không bị trọng lực rơi
-            rb.simulated = true; // Phải bật simulated mới tương tác được Trigger
+            rb = gameObject.AddComponent<Rigidbody2D>();
         }
-        
+
+        // --- CẤU HÌNH VẬT LÝ CHO GHOST ---
+        // Kinematic: Không bị trọng lực, nhưng có thể đẩy các vật thể Dynamic khác (như Player)
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.simulated = true;
+        rb.useFullKinematicContacts = true; // Quan trọng: Để va chạm với Dynamic Body
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
         var col = GetComponent<Collider2D>();
         if (col != null)
         {
             col.enabled = true;
-            col.isTrigger = true; // Ghost là bóng ma, đi xuyên qua mọi thứ
+            col.isTrigger = false; // Tắt Trigger để có va chạm vật lý thật (chặn đường)
         }
 
-        // Set transparency
         if (ghostSkeleton != null)
         {
             ghostSkeleton.skeleton.A = 0.5f;
         }
+        
+        gameObject.SetActive(false);
+    }
+
+    public void StartReplay(List<SpineRewind.FrameData> data)
+    {
+        if (data == null || data.Count == 0) return;
+
+        replayData = data;
+        isReplaying = true;
+        replayStartTime = Time.time;
+        currentIndex = 0;
+        
+        gameObject.SetActive(true);
+        
+        // Set vị trí đầu tiên ngay lập tức
+        transform.position = data[0].position;
+        ApplyFrame(data[0]);
+    }
+
+    public void StopReplay()
+    {
+        isReplaying = false;
+        gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        if (targetRewind == null) return;
+        if (!isReplaying || replayData == null || replayData.Count == 0) return;
 
-        // Apply Transform
-        var transformState = targetRewind.GetTransformSnapshot(delay);
-        transform.position = transformState.position;
-        transform.rotation = transformState.rotation;
-        transform.localScale = transformState.scale;
+        float currentTime = Time.time - replayStartTime;
 
-        // Apply Animation
-        if (ghostSkeleton != null)
+        while (currentIndex < replayData.Count - 1 && replayData[currentIndex + 1].time <= currentTime)
         {
-            var spineState = targetRewind.GetSpineSnapshot(delay);
-            ApplySpineState(spineState);
+            currentIndex++;
+        }
+
+        // Thay vì gán transform.position, ta dùng MovePosition để tương tác vật lý
+        if (rb != null)
+        {
+            // Di chuyển vật lý đến vị trí của frame hiện tại
+            rb.MovePosition(replayData[currentIndex].position);
+        }
+        else
+        {
+            transform.position = replayData[currentIndex].position;
+        }
+
+        ApplyFrame(replayData[currentIndex]);
+
+        if (currentTime > replayData[replayData.Count - 1].time)
+        {
+            // Hết dữ liệu
         }
     }
 
-    private void ApplySpineState(SpineRewind.SpineAnimationState state)
+    private void ApplyFrame(SpineRewind.FrameData frame)
     {
-        // Handle empty/null as "Stop animation" / "Setup pose"
-        if (string.IsNullOrEmpty(state.animationName) || state.animationName == "<empty>")
+        // Scale vẫn gán trực tiếp vì Rigidbody không quản lý scale
+        transform.localScale = frame.scale;
+
+        if (ghostSkeleton == null) return;
+
+        if (string.IsNullOrEmpty(frame.animationName))
         {
             var current = ghostSkeleton.AnimationState.GetCurrent(0);
             if (current != null && current.Animation != null && current.Animation.Name != "<empty>")
@@ -82,17 +119,15 @@ public class GhostRewinder : MonoBehaviour
 
         var currentTrack = ghostSkeleton.AnimationState.GetCurrent(0);
         
-        // If animation changed, set new animation
-        if (currentTrack == null || currentTrack.Animation == null || currentTrack.Animation.Name != state.animationName)
+        if (currentTrack == null || currentTrack.Animation == null || currentTrack.Animation.Name != frame.animationName)
         {
-            ghostSkeleton.AnimationState.SetAnimation(0, state.animationName, state.loop);
+            ghostSkeleton.AnimationState.SetAnimation(0, frame.animationName, frame.loop);
             currentTrack = ghostSkeleton.AnimationState.GetCurrent(0);
         }
 
-        // Sync time
         if (currentTrack != null)
         {
-            currentTrack.TrackTime = state.trackTime;
+            currentTrack.TrackTime = frame.trackTime;
             ghostSkeleton.Update(0);
         }
     }

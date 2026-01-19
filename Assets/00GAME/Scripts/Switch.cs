@@ -2,34 +2,80 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
-    [Header("Settings")]
-    [Tooltip("Kéo GameObject ExitPoint (có tag 'End') vào đây")]
-    public Collider2D exitPoint; 
-    public SpriteRenderer switchRenderer;
+    [Header("References")]
+    [Tooltip("Kéo GameObject Cánh Cửa (Door) cần mở vào đây")]
+    public Transform doorObject; 
     
-    [Header("Visuals")]
-    public Color activeColor = Color.green;
-    public Color inactiveColor = Color.white;
+    [Tooltip("Kéo GameObject con (cái nút bấm) vào đây")]
+    public Transform switchButton;
+    
+    [Header("Settings")]
+    public float pressDepth = 0.15f;
+    public float buttonSpeed = 5f;
+    public float doorSpeed = 3f;
 
     private int objectsOnSwitch = 0;
+    
+    private Vector3 btnInitialPos;
+    private Vector3 btnTargetPos;
+
+    private Vector3 doorClosedPos;
+    private Vector3 doorOpenPos;
+    private Vector3 doorTargetPos;
 
     void Start()
     {
-        if (exitPoint != null)
+        if (switchButton != null)
         {
-            exitPoint.isTrigger = false;
+            btnInitialPos = switchButton.localPosition;
+            btnTargetPos = btnInitialPos;
         }
-        UpdateVisuals(false);
+
+        if (doorObject != null)
+        {
+            doorClosedPos = doorObject.localPosition;
+            
+            float height = 3.4f;
+            
+            // var col = doorObject.GetComponent<Collider2D>();
+            // if (col != null) height = col.bounds.size.y;
+            // else
+            // {
+            //     var spr = doorObject.GetComponent<SpriteRenderer>();
+            //     if (spr != null) height = spr.bounds.size.y;
+            // }
+
+            doorOpenPos = doorClosedPos + new Vector3(0, height, 0);
+            
+            doorTargetPos = doorClosedPos;
+        }
     }
 
-    // --- XỬ LÝ TRIGGER ---
+    void Update()
+    {
+        if (switchButton != null)
+        {
+            switchButton.localPosition = Vector3.MoveTowards(
+                switchButton.localPosition, 
+                btnTargetPos, 
+                buttonSpeed * Time.deltaTime
+            );
+        }
+
+        if (doorObject != null)
+        {
+            doorObject.localPosition = Vector3.MoveTowards(
+                doorObject.localPosition, 
+                doorTargetPos, 
+                doorSpeed * Time.deltaTime
+            );
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"[Switch] Trigger Enter: {other.gameObject.name} | Tag: {other.tag} | Layer: {LayerMask.LayerToName(other.gameObject.layer)}");
-        
         if (IsValidObject(other.gameObject))
         {
-            Debug.Log("-> HỢP LỆ (Trigger)");
             AddObject();
         }
     }
@@ -38,19 +84,14 @@ public class Switch : MonoBehaviour
     {
         if (IsValidObject(other.gameObject))
         {
-            Debug.Log($"[Switch] Trigger Exit: {other.gameObject.name}");
             RemoveObject();
         }
     }
 
-    // --- XỬ LÝ COLLISION ---
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"[Switch] Collision Enter: {collision.gameObject.name} | Tag: {collision.gameObject.tag} | Layer: {LayerMask.LayerToName(collision.gameObject.layer)}");
-
         if (IsValidObject(collision.gameObject))
         {
-            Debug.Log("-> HỢP LỆ (Collision)");
             AddObject();
         }
     }
@@ -59,15 +100,13 @@ public class Switch : MonoBehaviour
     {
         if (IsValidObject(collision.gameObject))
         {
-            Debug.Log($"[Switch] Collision Exit: {collision.gameObject.name}");
             RemoveObject();
         }
     }
 
     private bool IsValidObject(GameObject obj)
     {
-        // Bỏ qua Ground để đỡ spam log, nhưng vẫn log ở trên để kiểm tra
-        if (obj.CompareTag("Ground")) return false;
+        if (obj.CompareTag("Ground") || obj.CompareTag("Untagged")) return false;
 
         bool isPlayer = obj.CompareTag("Player");
         bool isGhost = obj.GetComponent<GhostRewinder>() != null;
@@ -77,19 +116,12 @@ public class Switch : MonoBehaviour
             isGhost = obj.GetComponentInParent<GhostRewinder>() != null;
         }
 
-        if (!isPlayer && !isGhost)
-        {
-            Debug.Log($"-> KHÔNG HỢP LỆ: Không phải Player (Tag={obj.tag}) và không có GhostRewinder");
-        }
-
         return isPlayer || isGhost;
     }
 
     private void AddObject()
     {
         objectsOnSwitch++;
-        Debug.Log($"Objects on switch: {objectsOnSwitch}");
-        
         if (objectsOnSwitch == 1)
         {
             SetState(true);
@@ -100,7 +132,6 @@ public class Switch : MonoBehaviour
     {
         objectsOnSwitch--;
         if (objectsOnSwitch < 0) objectsOnSwitch = 0;
-        Debug.Log($"Objects on switch: {objectsOnSwitch}");
 
         if (objectsOnSwitch == 0)
         {
@@ -110,28 +141,20 @@ public class Switch : MonoBehaviour
 
     private void SetState(bool isActive)
     {
-        Debug.Log($"Set Switch State: {isActive}");
-        if (exitPoint != null)
+        if (switchButton != null)
         {
-            exitPoint.isTrigger = isActive;
+            if (isActive)
+                btnTargetPos = new Vector3(btnInitialPos.x, btnInitialPos.y - pressDepth, btnInitialPos.z);
+            else
+                btnTargetPos = btnInitialPos;
         }
-        UpdateVisuals(isActive);
-    }
 
-    private void UpdateVisuals(bool isActive)
-    {
-        if (switchRenderer != null)
+        if (doorObject != null)
         {
-            switchRenderer.color = isActive ? activeColor : inactiveColor;
-        }
-        
-        if (exitPoint != null)
-        {
-            var doorRenderer = exitPoint.GetComponent<SpriteRenderer>();
-            if (doorRenderer != null)
-            {
-                doorRenderer.color = isActive ? activeColor : inactiveColor;
-            }
+            if (isActive)
+                doorTargetPos = doorOpenPos;
+            else
+                doorTargetPos = doorClosedPos;
         }
     }
 }

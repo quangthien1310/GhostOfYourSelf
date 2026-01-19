@@ -113,14 +113,12 @@ public class PlayerController2D : MonoBehaviour
         currentObject = null;
     }
 
-    // ================= GROUND =================
     void CheckGround()
     {
         isGrounded = Physics2D.OverlapCircle(
             groundCheck.position, groundRadius, groundLayer);
     }
 
-    // ================= ANIMATION =================
     void HandleAnimation()
     {
         if (isInteracting)

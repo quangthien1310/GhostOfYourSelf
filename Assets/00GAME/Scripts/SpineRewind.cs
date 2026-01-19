@@ -1,99 +1,73 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Spine.Unity;
 
-public class SpineRewind : RewindAbstract
+public class SpineRewind : MonoBehaviour
 {
     private SkeletonAnimation skeletonAnimation;
-    private CircularBuffer<SpineAnimationState> trackedSpineStates;
-
-    public struct SpineAnimationState
+    
+    // Dữ liệu ghi hình cho vòng lặp
+    public struct FrameData
     {
+        public float time;
+        public Vector3 position;
+        public Vector3 scale;
         public string animationName;
-        public float trackTime;
         public bool loop;
+        public float trackTime;
     }
+
+    private List<FrameData> recordedFrames = new List<FrameData>();
+    private bool isRecording = false;
+    private float startTime;
 
     private void Start()
     {
         skeletonAnimation = GetComponent<SkeletonAnimation>();
-        trackedSpineStates = new CircularBuffer<SpineAnimationState>();
     }
 
-    public override void Track()
+    public void StartRecording()
     {
-        TrackTransform();
-        TrackSpine();
+        recordedFrames.Clear();
+        isRecording = true;
+        startTime = Time.time;
     }
 
-    public override void Rewind(float seconds)
+    public void StopRecording()
     {
-        RestoreTransform(seconds);
-        RestoreSpine(seconds);
+        isRecording = false;
     }
 
-    private void TrackSpine()
+    public List<FrameData> GetRecordedData()
     {
-        if (skeletonAnimation == null) return;
+        return new List<FrameData>(recordedFrames);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isRecording || skeletonAnimation == null) return;
 
         var currentTrack = skeletonAnimation.AnimationState.GetCurrent(0);
-        SpineAnimationState state = new SpineAnimationState();
+        string animName = "";
+        bool loop = false;
+        float trackTime = 0;
 
         if (currentTrack != null && currentTrack.Animation != null)
         {
-            string animName = currentTrack.Animation.Name;
-            // Spine uses "<empty>" for empty animations, treat as empty string
+            animName = currentTrack.Animation.Name;
             if (animName == "<empty>") animName = "";
-            
-            state.animationName = animName;
-            state.trackTime = currentTrack.TrackTime;
-            state.loop = currentTrack.Loop;
+            loop = currentTrack.Loop;
+            trackTime = currentTrack.TrackTime;
         }
-        else
+
+        recordedFrames.Add(new FrameData
         {
-            state.animationName = "";
-            state.trackTime = 0;
-            state.loop = false;
-        }
-
-        trackedSpineStates.WriteLastValue(state);
-    }
-
-    private void RestoreSpine(float seconds)
-    {
-        if (skeletonAnimation == null) return;
-
-        SpineAnimationState state = trackedSpineStates.ReadFromBuffer(seconds);
-
-        // Handle empty/null as "Stop animation" / "Setup pose"
-        if (string.IsNullOrEmpty(state.animationName) || state.animationName == "<empty>")
-        {
-            var current = skeletonAnimation.AnimationState.GetCurrent(0);
-            if (current != null && current.Animation != null && current.Animation.Name != "<empty>")
-            {
-                skeletonAnimation.AnimationState.SetEmptyAnimation(0, 0.1f);
-            }
-            return;
-        }
-
-        var currentTrack = skeletonAnimation.AnimationState.GetCurrent(0);
-        
-        // If animation changed, set new animation
-        if (currentTrack == null || currentTrack.Animation == null || currentTrack.Animation.Name != state.animationName)
-        {
-            skeletonAnimation.AnimationState.SetAnimation(0, state.animationName, state.loop);
-            currentTrack = skeletonAnimation.AnimationState.GetCurrent(0);
-        }
-
-        // Sync time
-        if (currentTrack != null)
-        {
-            currentTrack.TrackTime = state.trackTime;
-            skeletonAnimation.Update(0); // Force update to apply changes immediately
-        }
-    }
-
-    public SpineAnimationState GetSpineSnapshot(float seconds)
-    {
-        return trackedSpineStates.ReadFromBuffer(seconds);
+            time = Time.time - startTime, // Lưu thời gian tương đối tính từ lúc bắt đầu loop
+            position = transform.position,
+            scale = transform.localScale,
+            animationName = animName,
+            loop = loop,
+            trackTime = trackTime
+        });
     }
 }
