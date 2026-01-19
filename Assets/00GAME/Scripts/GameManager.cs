@@ -17,22 +17,28 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void OnRestartButtonClicked()
+    private void Start()
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
-        
         Time.timeScale = 1;
     }
 
-    public void OnLevel2ButtonClicked()
+    public void OnRestartButtonClicked()
     {
-        SceneManager.LoadScene("Level_2");
+        Time.timeScale = 1;
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
     
     public void OnMenuButtonClicked()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("GameMenu");
+    }
+
+    public void OnLevel2ButtonClicked()
+    {
+        Time.timeScale = 1;
+
+        SceneManager.LoadScene("Level_2");
     }
 }
