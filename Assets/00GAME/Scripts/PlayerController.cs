@@ -11,7 +11,8 @@ public class PlayerController2D : MonoBehaviour
     [Header("Check Ground")]
     public Transform groundCheck;
     public LayerMask groundLayer;
-    public float groundRadius = 0.15f;
+    public Vector2 groundBoxSize = new Vector2(0.5f, 0.1f); // Kích thước vùng kiểm tra (Rộng x Cao)
+    public float groundCastDistance = 0.05f; // Khoảng cách quét xuống dưới
 
     [Header("Spine")]
     public SkeletonAnimation skeleton;
@@ -27,6 +28,7 @@ public class PlayerController2D : MonoBehaviour
     PushPullObject currentObject;
 
     float horizontal;
+    bool jumpPressed;
 
     void Awake()
     {
@@ -35,22 +37,27 @@ public class PlayerController2D : MonoBehaviour
 
     private void Start()
     {
-        winPanel.gameObject.SetActive(false);
+        if (winPanel != null) winPanel.gameObject.SetActive(false);
     }
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+        {
+            jumpPressed = true;
+        }
+
         CheckGround();
         HandleInteraction();
         HandleAnimation();
         HandleFlip();
-        HandleMovement();
     }
 
     void FixedUpdate()
     {
+        HandleMovement();
     }
 
     // ================= MOVEMENT =================
@@ -70,9 +77,10 @@ public class PlayerController2D : MonoBehaviour
 
         rb.linearVelocity = new Vector2(horizontal * moveSpeed, rb.linearVelocity.y);
 
-        if ((Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown(KeyCode.UpArrow))&& isGrounded)
+        if (jumpPressed)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            jumpPressed = false;
         }
     }
 
@@ -113,12 +121,24 @@ public class PlayerController2D : MonoBehaviour
         currentObject = null;
     }
 
+    // ================= GROUND =================
     void CheckGround()
     {
-        isGrounded = Physics2D.OverlapCircle(
-            groundCheck.position, groundRadius, groundLayer);
+        // Sử dụng BoxCast thay vì OverlapCircle để kiểm tra mặt đất tốt hơn trên dốc
+        // Quét một hình hộp từ vị trí groundCheck xuống dưới một khoảng nhỏ
+        RaycastHit2D hit = Physics2D.BoxCast(
+            groundCheck.position, 
+            groundBoxSize, 
+            0f, 
+            Vector2.down, 
+            groundCastDistance, 
+            groundLayer
+        );
+
+        isGrounded = hit.collider != null;
     }
 
+    // ================= ANIMATION =================
     void HandleAnimation()
     {
         if (isInteracting)
@@ -158,10 +178,8 @@ public class PlayerController2D : MonoBehaviour
     {
         if (skeleton == null) return;
 
-        // Handle empty/null as "Stop animation" / "Setup pose"
         if (string.IsNullOrEmpty(anim))
         {
-            // Only set empty if we are not already empty
             if (skeleton.AnimationState.GetCurrent(0) != null)
             {
                 skeleton.AnimationState.SetEmptyAnimation(0, 0.1f);
@@ -204,7 +222,11 @@ public class PlayerController2D : MonoBehaviour
         if (groundCheck != null)
         {
             Gizmos.color = isGrounded ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+            // Vẽ vùng BoxCast để dễ debug
+            Gizmos.DrawWireCube(
+                groundCheck.position + Vector3.down * groundCastDistance * 0.5f, 
+                groundBoxSize
+            );
         }
     }
 }

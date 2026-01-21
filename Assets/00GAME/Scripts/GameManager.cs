@@ -41,4 +41,11 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene("Level_2");
     }
+    
+    public void OnLevel3ButtonClicked()
+    {
+        Time.timeScale = 1;
+
+        SceneManager.LoadScene("Level_3");
+    }
 }
